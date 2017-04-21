@@ -1,11 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-// const App = (props: string) => {
-//   return(
-//     <h1>{props}</h1>
-//   )
-// }
 interface AppState { counter: number;}
 class App extends React.Component<undefined, AppState> {
   state = { counter: 0 }
@@ -30,12 +25,18 @@ class App extends React.Component<undefined, AppState> {
 }
 
 interface ButtonProps { incrementValue: number; onClickFunction(incrementValue: number): void; }
-const Button = (props: ButtonProps) => {
-  return (
-    <button 
-      onClick={()=>props.onClickFunction(props.incrementValue)}>+{props.incrementValue}
-    </button>
-  )
+class Button extends React.Component<ButtonProps, undefined> {
+  handleClick = () => {
+    this.props.onClickFunction(this.props.incrementValue);
+  }
+  
+  render(){
+    return (
+      <button 
+        onClick={this.handleClick}>+{this.props.incrementValue}
+      </button>
+    )
+  }
 }
 
 interface ResultProps { counter: number; }
