@@ -6,7 +6,7 @@
     "strictNullChecks": true,
     "removeComments": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": false,
+    "noUnusedParameters": true,
     "module": "commonjs",
     "target": "es2015",
     "jsx": "react"
