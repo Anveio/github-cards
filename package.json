@@ -1,0 +1,35 @@
+{
+  "name": "getting-started",
+  "version": "1.0.0",
+  "description": "Pluralsight: React.js Getting Started by Samer Buna",
+  "main": "app",
+  "author": "Shovon Hasan <im.shovonhasan@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/react": "^15.0.22",
+    "@types/react-dom": "^0.14.23",
+    "@types/react-router": "^4.0.4",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "react-router-dom": "^4.1.1"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.1.2",
+    "css-loader": "^0.28.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "image-webpack-loader": "^3.3.0",
+    "source-map-loader": "^0.2.1",
+    "style-loader": "^0.16.1",
+    "typescript": "^2.2.2",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.4.1",
+    "webpack-livereload-plugin": "^0.11.0"
+  },
+  "scripts": {
+    "build-dev": "webpack --config webpack.config.js",
+    "build-prod": "webpack --config webpack.config.js -p",
+    "build-watch": "webpack --config webpack.config.js --watch"
+  }
+}
