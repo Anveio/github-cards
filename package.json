@@ -9,6 +9,7 @@
     "@types/react": "^15.0.22",
     "@types/react-dom": "^0.14.23",
     "@types/react-router": "^4.0.4",
+    "axios": "^0.16.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
