@@ -19,19 +19,6 @@ const CardDisplay = (props: CardInterface) => {
   )
 }
 
-// let data: Card[]  = [
-//   { 
-//     name: "Shovon Hasan",
-//     avatarUrl: "https://avatars0.githubusercontent.com/u/8881711?v=3",
-//     company: ""
-//   },
-//   {
-//     name: "Paul O’Shannessy",
-//     avatarUrl: "https://avatars2.githubusercontent.com/u/8445?v=3",
-//     company: "Facebook"
-//   }
-// ]
-
 interface CardListProps { cards: Card[]; }
 const CardList = (props: CardListProps) => {
   return (
@@ -100,6 +87,11 @@ class App extends React.Component<undefined, AppState> {
   render() {
     return(
       <div>
+        <div>
+          <h1>Github Cards</h1>
+          <p>This app was written by Shovon Hasan and the source code is available on Github</p>
+        </div>
+        
         <Form onSubmit={this.appendCard}/>
         <CardList cards={this.state.cards} />
       </div>

@@ -1,13 +1,11 @@
 const LiveReloadPlugin = require('webpack-livereload-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   plugins: [
     new LiveReloadPlugin({
       port: 5000,
       hostname: 'https://' + process.env.C9_HOSTNAME + "psadmin",
-    }),
-    new ExtractTextPlugin('styles.css')
+    })
   ],
   entry: "./src/app.tsx",
   output: {
@@ -27,27 +25,13 @@ module.exports = {
         test: /\.tsx?$/, 
         loader: "awesome-typescript-loader" 
       },
-      
-      // All image files will be handled by 'url-loader'
-      {
-        test: /\.(jpg|png|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 25000, // Images can be 25kb max;
-        },
-      },
-      
-      // Handle our CSS
-      {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: 'css-loader',
-          fallback: 'style-loader'
-        })
-      },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+      { 
+        enforce: "pre", 
+        test: /\.js$/, 
+        loader: "source-map-loader" 
+      }
     ]
   },
   
@@ -56,7 +40,7 @@ module.exports = {
   // This is important because it allows us to avoid bundling all of our
   // dependencies, which allows browsers to cache those libraries between builds.
   externals: {
-    "react": "React",
-    "react-dom": "ReactDOM",
-  }
+      "react": "React",
+      "react-dom": "ReactDOM"
+  },
 }
