@@ -4,7 +4,7 @@ import axios from "axios";
 
 interface CardInterface { name: string; avatarUrl: string; company: string; }
 class Card implements CardInterface {
-    constructor(public name: string, public avatarUrl: string, public company: string) { }
+    constructor(readonly name: string, readonly avatarUrl: string, readonly company: string) { }
 }
 
 const CardDisplay = (props: CardInterface) => {
