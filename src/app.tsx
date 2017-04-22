@@ -1,50 +1,44 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-interface AppState { counter: number;}
-class App extends React.Component<undefined, AppState> {
-  state = { counter: 0 }
-  
-  incrementCounter = (incrementValue: number) => {
-    this.setState((prevState: AppState) => ({
-      counter: prevState.counter + incrementValue
-    }));
-  }
-  
-  render() {
-    return (
-      <div>
-        <Button incrementValue={1} onClickFunction={this.incrementCounter} />
-        <Button incrementValue={10} onClickFunction={this.incrementCounter} />
-        <Button incrementValue={100} onClickFunction={this.incrementCounter} />
-        <Button incrementValue={1000} onClickFunction={this.incrementCounter} />
-        <Result counter={this.state.counter} />
-      </div>
-    )
-  }
+interface CardInterface { name: string; avatarUrl: string; company: string; }
+class Card implements CardInterface {
+    constructor(public name: string, public avatarUrl: string, public company: string) { }
 }
 
-interface ButtonProps { incrementValue: number; onClickFunction(incrementValue: number): void; }
-class Button extends React.Component<ButtonProps, undefined> {
-  handleClick = () => {
-    this.props.onClickFunction(this.props.incrementValue);
-  }
-  
-  render(){
-    return (
-      <button 
-        onClick={this.handleClick}>+{this.props.incrementValue}
-      </button>
-    )
-  }
-}
-
-interface ResultProps { counter: number; }
-const Result = (props: ResultProps) => {
+const CardDisplay = (props: CardInterface) => {
   return (
-    <div>{props.counter}</div>
+    <div>
+      <img width="75" src={props.avatarUrl} />
+      <div style={{display: 'inline-block', marginLeft: 10}}>
+        <div style={{fontSize: '1.25em', fontWeight: 'bold'}}>{props.name}</div>
+        <div>{props.company}</div>
+      </div>
+    </div>
   )
 }
 
 
-ReactDOM.render(<App/>, document.getElementById('app'))
+let data: Card[]  = [
+  { 
+    name: "Shovon Hasan",
+    avatarUrl: "https://avatars0.githubusercontent.com/u/8881711?v=3",
+    company: ""
+  },
+  {
+    name: "Paul O’Shannessy",
+    avatarUrl: "https://avatars2.githubusercontent.com/u/8445?v=3",
+    company: "Facebook"
+  }
+]
+
+interface CardListProps { cards: Card[]; }
+const CardList = (props: CardListProps) => {
+  return (
+    <div>
+      {props.cards.map(card => <CardDisplay {...card}/>)}
+    </div>
+  )
+}
+
+ReactDOM.render(<CardList cards={data}/>, document.getElementById('app'))
