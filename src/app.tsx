@@ -18,8 +18,8 @@ const CardDisplay = (props: Card) => {
   )
 }
 
-interface CardListProps { cards: Card[]; }
-const CardList = (props: CardListProps) => {
+interface CardArray { cards: Card[]; }
+const CardList = (props: CardArray) => {
   return (
     <div>
       {props.cards.map((card: Card, index: number) => <CardDisplay {...card} key={index}/>)}
