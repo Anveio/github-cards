@@ -1,12 +1,4 @@
-const LiveReloadPlugin = require('webpack-livereload-plugin');
-
 module.exports = {
-  plugins: [
-    new LiveReloadPlugin({
-      port: 5000,
-      hostname: 'https://' + process.env.C9_HOSTNAME + "psadmin",
-    })
-  ],
   entry: "./src/app.tsx",
   output: {
     filename: "bundle.js",

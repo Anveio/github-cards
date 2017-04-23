@@ -2,12 +2,11 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import axios from "axios";
 
-interface CardInterface { name: string; avatarUrl: string; company: string; }
-class Card implements CardInterface {
+class Card {
     constructor(readonly name: string, readonly avatarUrl: string, readonly company: string) { }
 }
 
-const CardDisplay = (props: CardInterface) => {
+const CardDisplay = (props: Card) => {
   return (
     <div>
       <img width="75" src={props.avatarUrl} />
