@@ -3,7 +3,7 @@ import * as ReactDOM from "react-dom";
 import axios from "axios";
 
 class Card {
-    constructor(readonly name: string, readonly avatarUrl: string, readonly company: string) { }
+  constructor(readonly name: string, readonly avatarUrl: string, readonly company: string) { }
 }
 
 const CardDisplay = (props: Card) => {
@@ -66,7 +66,7 @@ class Form extends React.Component<FormProps, FormState> {
 }
 
 interface AppState { cards: Card[]; }
-class App extends React.Component<undefined, AppState> {
+class App extends React.Component<never, AppState> {
   state = { 
     cards: []
   }
@@ -98,4 +98,4 @@ class App extends React.Component<undefined, AppState> {
   }
 }
 
-ReactDOM.render(<App/>, document.getElementById('app'))
+ReactDOM.render(<App />, document.getElementById('app'))
