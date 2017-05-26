@@ -1,29 +1,32 @@
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const typescript = { test: /\.tsx?$/, loader: "awesome-typescript-loader" }
+const javascript = { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+const css = { test: /\.css$/, loader: ExtractTextPlugin.extract('css?sourceMap') }
+
 module.exports = {
-  entry: "./src/app.tsx",
+  entry: "./index.js",
   output: {
+    path: __dirname + "/public/dist",
+    publicPath: '/',
     filename: "bundle.js",
-    path: __dirname + "/public/dist"
   },
-  
-  devtool: "source-map",
+  plugins: [
+    // Generate an external css file with a hash in the filename
+    new ExtractTextPlugin('[name].[contenthash].css'),
 
-  resolve: {
-    extensions: ["webpack.js", ".web.js", ".ts", ".tsx", ".js", "json"]
-  },
+    new HtmlWebpackPlugin({}),
+
+    // Eliminate duplicate packages when generating bundle
+    new webpack.optimize.DedupePlugin(),
+
+    // Minify JS
+    new webpack.optimize.UglifyJsPlugin()
+  ],
   module: {
-    rules: [
-      // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
-      { 
-        test: /\.tsx?$/, 
-        loader: "awesome-typescript-loader" 
-      },
-
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      { 
-        enforce: "pre", 
-        test: /\.js$/, 
-        loader: "source-map-loader" 
-      }
-    ]
+    rules: [ typescript, javascript, css ]
   },
 }

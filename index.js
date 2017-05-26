@@ -9,10 +9,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
-app.get('/', function(request, response) {
+app.get('/', (request, response) => {
   response.render('index');
 });
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), () => {
   console.log('Node app is running on port', app.get('port'));
 });
