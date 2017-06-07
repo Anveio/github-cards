@@ -19,6 +19,7 @@ describe('Using the app for the first time', () => {
   it('shows the add user form after clicking the empty state button', () => {
     const app = setup();
     const emptyStateBtn = app.find(Button).at(0);
+    expect(app.find(Form).length).toEqual(0);
     emptyStateBtn.simulate('click');
     expect(app.find(Form).length).toEqual(1);
   });
