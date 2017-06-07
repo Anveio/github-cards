@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Layout, FormLayout, TextField, Button } from '@shopify/polaris';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import Error from './Error';
 
 interface Props { onSubmit(newCard: User): void; }
-interface State { userName: string;  }
+interface State { userName: string; error: GithubApiError | null; }
 export default class Form extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      userName: ''
+      userName: '',
+      error: null
     };
   }
 
@@ -19,8 +21,11 @@ export default class Form extends React.PureComponent<Props, State> {
         this.props.onSubmit(userData);
         this.setState({ userName: '' });
       })
-    .catch((reason) => {
-      this.setState({ userName: '' });
+    .catch((reason: AxiosError) => {
+      this.setState(prevState => ({ 
+        userName: '',
+        error: this.generateError(reason)
+      }));
     });
   }
 
@@ -30,6 +35,17 @@ export default class Form extends React.PureComponent<Props, State> {
       avatarUrl: newCard.avatar_url,
       company: newCard.company
     };
+  }
+
+  readonly generateError = (reason: AxiosError): GithubApiError => {
+    return {
+      name: this.state.userName,
+      code: reason.code
+    };
+  }
+
+  readonly dismissError = (): void => {
+    this.setState({ error: null});
   }
   
   readonly handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -44,12 +60,19 @@ export default class Form extends React.PureComponent<Props, State> {
   readonly handleInput = (text: string): void => {
     this.setState({ userName: text });
   }
+
+  readonly errorBanner = () => {
+    return (this.state.error)
+    ? <Error error={this.state.error} onDismiss={this.dismissError}/>
+    : null;
+  }
   
   public render() {
     return (
       <Layout.Section>
         <form onSubmit={this.handleSubmit}>
           <FormLayout>
+            {this.errorBanner()}
             <TextField 
               label="Add user"
               placeholder="e.g. 'samerbuna'"

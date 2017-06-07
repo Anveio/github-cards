@@ -34,15 +34,13 @@ export default class App extends React.PureComponent<never, State> {
   readonly inactiveMarkup = (): JSX.Element => {
     return (
       <Page title="Github Cards">
-        <Layout>
-          <EmptyState
-            heading="You haven't added any users yet."
-            action={{ content: 'Add user', onAction: this.setActive}}
-            image={emptyImage}
-          >
-            <p>Get started by adding a user.</p>
-          </EmptyState>
-        </Layout>
+        <EmptyState
+          heading="You haven't added any users yet."
+          action={{ content: 'Add user', onAction: this.setActive}}
+          image={emptyImage}
+        >
+          <p>Get started by adding a user.</p>
+        </EmptyState>
       </Page>
     );
   }
