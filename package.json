@@ -1,45 +1,28 @@
 {
   "name": "github-cards",
-  "version": "1.0.0",
-  "description": "Pluralsight: React.js Getting Started by Samer Buna",
-  "engines": {
-    "node": "7.9.0"
-  },
-  "main": "./dist/bundle.js",
-  "author": "Shovon Hasan <im.shovonhasan@gmail.com>",
-  "license": "MIT",
+  "version": "2.0.0",
   "dependencies": {
+    "@shopify/polaris": "^1.0.3",
     "axios": "^0.16.1",
-    "babel-loader": "^7.0.0",
-    "express": "^4.15.2",
-    "pug": "^2.0.0-rc.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
-    "@types/react": "^15.0.22",
-    "@types/react-dom": "^0.14.23",
-    "@types/react-router": "^4.0.4",
-    "awesome-typescript-loader": "^3.1.2",
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-preset-latest": "^6.24.1",
-    "css-loader": "^0.28.0",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "file-loader": "^0.11.1",
-    "html-webpack-plugin": "^2.28.0",
-    "image-webpack-loader": "^3.3.0",
-    "pug-loader": "^2.3.0",
-    "source-map-loader": "^0.2.1",
-    "style-loader": "^0.16.1",
-    "typescript": "^2.2.2",
-    "url-loader": "^0.5.8",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.5",
-    "webpack-livereload-plugin": "^0.11.0"
+    "@types/axios": "^0.14.0",
+    "@types/enzyme": "^2.8.0",
+    "@types/jest": "^19.2.3",
+    "@types/node": "^7.0.22",
+    "@types/react": "^15.0.25",
+    "@types/react-dom": "^15.5.0",
+    "enzyme": "^2.8.2",
+    "react-addons-test-utils": "^15.5.1",
+    "react-scripts-ts": "2.2.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --watch-poll --quiet --config webpack.config.js",
-    "build-prod": "webpack --config webpack.config.js -p"
-  }
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
+  "license": "MIT"
 }
