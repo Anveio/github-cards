@@ -1,10 +1,10 @@
-declare interface UserData {
+declare interface User {
   readonly name: string; 
   readonly avatarUrl: string;
   readonly company: string;
 }
 
-declare interface GithubApiResponse {
+declare interface GithubApiData {
   readonly name: string;
   readonly avatar_url: string;
   readonly company: string;
