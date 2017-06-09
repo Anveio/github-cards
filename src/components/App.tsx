@@ -10,7 +10,7 @@ export default class App extends React.PureComponent<never, State> {
   constructor(props: never) {
     super(props);
     this.state = {
-      active: false,
+      active: true,
       users: []
     };
   }
@@ -27,7 +27,7 @@ export default class App extends React.PureComponent<never, State> {
 
   readonly deleteUserCards = (userToDelete: User): void => {
     this.setState(prevState => ({
-      users: prevState.users.filter(user => user.name !== userToDelete.name)
+      users: prevState.users.filter(user => user.url !== userToDelete.url)
     }));
   }
 

@@ -12,3 +12,8 @@ const UserList = ({ users, onDelete }: Props) => {
 };
 
 export default UserList;
+
+/*<ResourceList 
+  items={users}
+  renderItem={(user: User, index: number) => <UserCard user={user} onDelete={onDelete} key={index}/>}
+/>*/

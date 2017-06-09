@@ -3,7 +3,7 @@ import { Layout, FormLayout, TextField, Button } from '@shopify/polaris';
 import axios, { AxiosError } from 'axios';
 import Error from './Error';
 
-interface Props { onSubmit(newCard: User): void; }
+interface Props { onSubmit(newUser: User): void; }
 interface State { userName: string; error: GithubApiError | null; }
 export default class Form extends React.PureComponent<Props, State> {
   constructor(props: Props) {
@@ -13,27 +13,29 @@ export default class Form extends React.PureComponent<Props, State> {
       error: null
     };
   }
-
+  
   readonly fetchData = (): void => {
+    this.dismissError();
     axios.get(`https://api.github.com/users/${this.state.userName}`)
       .then((res) => {
-        const userData = this.userFromApiResponse((res.data as GithubApiData));
+        const userData = this.userFromApiResponse((res.data as GithubResponse));
         this.props.onSubmit(userData);
         this.setState({ userName: '' });
       })
     .catch((reason: AxiosError) => {
-      this.setState(prevState => ({ 
+      this.setState({ 
         userName: '',
         error: this.generateError(reason)
-      }));
+      });
     });
   }
 
-  readonly userFromApiResponse = (newCard: GithubApiData): User => {
+  readonly userFromApiResponse = (newUser: GithubResponse): User => {
     return {
-      name: newCard.name,
-      avatarUrl: newCard.avatar_url,
-      company: newCard.company
+      url: newUser.html_url,
+      name: newUser.name,
+      avatarUrl: newUser.avatar_url,
+      company: newUser.company
     };
   }
 
@@ -53,17 +55,13 @@ export default class Form extends React.PureComponent<Props, State> {
     this.fetchData();
   }
 
-  readonly handleButtonClick = (): void => {
-    this.fetchData();
-  }
-
   readonly handleInput = (text: string): void => {
     this.setState({ userName: text });
   }
 
   readonly errorBanner = () => {
     return (this.state.error)
-    ? <Error error={this.state.error} onDismiss={this.dismissError}/>
+    ? <Error error={this.state.error} dismissError={this.dismissError}/>
     : null;
   }
   
@@ -86,7 +84,7 @@ export default class Form extends React.PureComponent<Props, State> {
             <Button
               primary
               icon="add"
-              onClick={this.handleButtonClick}
+              onClick={this.fetchData}
             >
               Add User
             </Button>
