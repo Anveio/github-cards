@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Layout, FormLayout, TextField, Button } from '@shopify/polaris';
 import axios, { AxiosError } from 'axios';
-import Error from './Error';
+import ErrorBanner from './Error';
 
 interface Props { onSubmit(newUser: User): void; }
-interface State { userName: string; error: GithubApiError | null; }
+interface State { userName: string; error: AxiosError | null; }
 export default class Form extends React.PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -25,7 +25,7 @@ export default class Form extends React.PureComponent<Props, State> {
     .catch((reason: AxiosError) => {
       this.setState({ 
         userName: '',
-        error: this.generateError(reason)
+        error: reason
       });
     });
   }
@@ -39,12 +39,12 @@ export default class Form extends React.PureComponent<Props, State> {
     };
   }
 
-  readonly generateError = (reason: AxiosError): GithubApiError => {
-    return {
-      name: this.state.userName,
-      code: reason.code
-    };
-  }
+  // readonly generateError = (reason: AxiosError): GithubApiError => {
+  //   return {
+  //     name: this.state.userName,
+  //     code: reason.code
+  //   };
+  // }
 
   readonly dismissError = (): void => {
     this.setState({ error: null});
@@ -61,20 +61,20 @@ export default class Form extends React.PureComponent<Props, State> {
 
   readonly errorBanner = () => {
     return (this.state.error)
-    ? <Error error={this.state.error} dismissError={this.dismissError}/>
+    ? <ErrorBanner error={this.state.error} dismissError={this.dismissError}/>
     : null;
   }
   
   public render() {
     return (
       <Layout.Section>
-        <form onSubmit={this.handleSubmit}>
-          <FormLayout>
+        <FormLayout>
+          <form onSubmit={this.handleSubmit}>
             {this.errorBanner()}
             <TextField 
               label="Add user"
               placeholder="e.g. 'samerbuna'"
-              helpText="Just the username, not the whole URL (e.g. https://github.com/samerbuna)."
+              helpText="Just the username, not the whole URL."
               type="text"
               value={this.state.userName}
               onChange={this.handleInput}
@@ -88,8 +88,8 @@ export default class Form extends React.PureComponent<Props, State> {
             >
               Add User
             </Button>
-          </FormLayout>
-        </form>
+          </form>
+        </FormLayout>
       </Layout.Section>
     );
   }

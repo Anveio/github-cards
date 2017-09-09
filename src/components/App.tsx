@@ -10,9 +10,11 @@ export default class App extends React.PureComponent<never, State> {
   constructor(props: never) {
     super(props);
     this.state = {
-      active: true,
+      active: false,
       users: []
     };
+
+    this.appendCard = this.appendCard.bind(this);
   }
 
   readonly setActive = (): void => {
